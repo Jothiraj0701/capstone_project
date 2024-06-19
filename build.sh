@@ -1,2 +1,3 @@
 #!/bin/bash
-docker-compose build
+docker build -t jolearner123/devops-build:dev .
+
