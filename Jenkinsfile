@@ -21,7 +21,7 @@ pipeline {
             steps {
                 script {
                     sh './build.sh'
-                    docker.withRegistry('https://registry.hub.docker.com', DOCKERHUB_CREDENTIALS) {
+                    docker.withRegistry('https://registry.hub.docker.com', $DOCKERHUB_CREDENTIALS) {
                         sh 'docker tag jolearner123/devops-build:dev jolearner123/devops-build-dev:latest'
                         sh 'docker push jolearner123/devops-build-dev:latest'
                     }
