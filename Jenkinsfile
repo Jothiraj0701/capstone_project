@@ -10,8 +10,7 @@ pipeline {
         stage('Check Branch') {
             steps {
                 script {
-                    // Print the branch name
-                    echo "Building from branch: ${env.BRANCH_NAME}"
+                    echo "Building branch: ${env.GIT_BRANCH}"
                 }
             }
         }
