@@ -7,13 +7,6 @@ pipeline {
     }
 
     stages {
-        stage('Check Branch') {
-            steps {
-                script {
-                    echo "Building branch: ${env.GIT_BRANCH}"
-                }
-            }
-        }
         stage('Build and Push to Dev') {
             when {
                 branch 'dev'
@@ -21,7 +14,7 @@ pipeline {
             steps {
                 script {
                     sh './build.sh'
-                    docker.withRegistry('https://registry.hub.docker.com', $DOCKERHUB_CREDENTIALS) {
+                    docker.withRegistry('https://registry.hub.docker.com', DOCKERHUB_CREDENTIALS) {
                         sh 'docker tag jolearner123/devops-build:dev jolearner123/devops-build-dev:latest'
                         sh 'docker push jolearner123/devops-build-dev:latest'
                     }
@@ -47,9 +40,6 @@ pipeline {
     post {
         success {
             echo 'Build and Deployment succeeded!'
-        }
-        failure {
-            echo 'Build or Deployment failed!'
         }
     }
 }
